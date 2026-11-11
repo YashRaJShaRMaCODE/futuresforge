@@ -38,6 +38,10 @@ The exchange remains responsible for symbol-specific quantity and price filters.
 ```powershell
 python -m unittest discover -s tests
 python -m compileall -q src tests
+ruff check src tests
+ruff format --check src tests
 ```
+
+GitHub Actions runs these checks on every push and pull request. The preview tests remove API credentials from their environment and use `python -S`, so they cannot place orders or create a log file.
 
 Only market and limit order entry points are implemented. TWAP, stop-limit, grid, and OCO features from earlier drafts are not included.

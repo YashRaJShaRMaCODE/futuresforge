@@ -7,7 +7,12 @@ class OrderValidationTests(unittest.TestCase):
     def test_normalizes_symbol_side_and_decimal(self):
         self.assertEqual(
             validate_order(" btcusdt ", "buy", "1e-3", "65000.00"),
-            {"symbol": "BTCUSDT", "side": "BUY", "quantity": "0.001", "price": "65000.00"},
+            {
+                "symbol": "BTCUSDT",
+                "side": "BUY",
+                "quantity": "0.001",
+                "price": "65000.00",
+            },
         )
 
     def test_market_and_limit_order_payloads(self):
@@ -17,8 +22,14 @@ class OrderValidationTests(unittest.TestCase):
         )
         self.assertEqual(
             build_limit_order("BTCUSDT", "SELL", "0.01", "65000"),
-            {"symbol": "BTCUSDT", "side": "SELL", "quantity": "0.01", "price": "65000",
-             "type": "LIMIT", "timeInForce": "GTC"},
+            {
+                "symbol": "BTCUSDT",
+                "side": "SELL",
+                "quantity": "0.01",
+                "price": "65000",
+                "type": "LIMIT",
+                "timeInForce": "GTC",
+            },
         )
 
     def test_rejects_invalid_symbol_or_side(self):
@@ -33,7 +44,10 @@ class OrderValidationTests(unittest.TestCase):
 
     def test_rejects_decimal_exponents_that_would_expand_huge_strings(self):
         for quantity in ("1e1000000000", "1e-1000000000"):
-            with self.subTest(quantity=quantity), self.assertRaisesRegex(ValueError, "64 characters"):
+            with (
+                self.subTest(quantity=quantity),
+                self.assertRaisesRegex(ValueError, "64 characters"),
+            ):
                 validate_order("BTCUSDT", "BUY", quantity)
 
     def test_limit_order_requires_a_positive_price(self):

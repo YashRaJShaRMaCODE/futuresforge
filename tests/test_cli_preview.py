@@ -1,18 +1,16 @@
 import os
-from pathlib import Path
 import subprocess
 import sys
 import tempfile
 import unittest
-
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 class PreviewCommandTests(unittest.TestCase):
     def run_preview(self, script, *args):
-        env = {key: value for key, value in os.environ.items()
-               if key not in {"BINANCE_API_KEY", "BINANCE_API_SECRET"}}
+        env = {key: value for key, value in os.environ.items() if key not in {"BINANCE_API_KEY", "BINANCE_API_SECRET"}}
         with tempfile.TemporaryDirectory(dir=ROOT) as temp_dir:
             result = subprocess.run(
                 [sys.executable, "-S", str(ROOT / "src" / script), *args],

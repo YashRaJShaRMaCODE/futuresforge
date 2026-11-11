@@ -31,7 +31,11 @@ def validate_order(symbol, side, quantity, price=None):
     if side not in {"BUY", "SELL"}:
         raise ValueError("Side must be BUY or SELL")
 
-    order = {"symbol": symbol, "side": side, "quantity": positive_decimal(quantity, "Quantity")}
+    order = {
+        "symbol": symbol,
+        "side": side,
+        "quantity": positive_decimal(quantity, "Quantity"),
+    }
     if price is not None:
         order["price"] = positive_decimal(price, "Price")
     return order
@@ -42,4 +46,8 @@ def build_market_order(symbol, side, quantity):
 
 
 def build_limit_order(symbol, side, quantity, price):
-    return {**validate_order(symbol, side, quantity, price), "type": "LIMIT", "timeInForce": "GTC"}
+    return {
+        **validate_order(symbol, side, quantity, price),
+        "type": "LIMIT",
+        "timeInForce": "GTC",
+    }
