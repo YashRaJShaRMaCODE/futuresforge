@@ -15,7 +15,7 @@ def place_limit_order(symbol, side, quantity, price, client=None):
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Preview a Binance USDⓈ-M Futures testnet limit order.")
     parser.add_argument("symbol")
-    parser.add_argument("side", choices=("BUY", "SELL"))
+    parser.add_argument("side", type=str.upper, choices=("BUY", "SELL"))
     parser.add_argument("quantity")
     parser.add_argument("price")
     parser.add_argument(

@@ -24,14 +24,14 @@ class PreviewCommandTests(unittest.TestCase):
             return result
 
     def test_market_preview_needs_no_exchange_package_or_credentials(self):
-        result = self.run_preview("market_orders.py", "BTCUSDT", "BUY", "0.01")
+        result = self.run_preview("market_orders.py", "BTCUSDT", "buy", "0.01")
 
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("Preview only", result.stdout)
         self.assertIn("MARKET", result.stdout)
 
     def test_limit_preview_needs_no_exchange_package_or_credentials(self):
-        result = self.run_preview("limit_order.py", "BTCUSDT", "SELL", "0.01", "65000")
+        result = self.run_preview("limit_order.py", "BTCUSDT", "sell", "0.01", "65000")
 
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("Preview only", result.stdout)

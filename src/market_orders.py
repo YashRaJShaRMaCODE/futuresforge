@@ -15,7 +15,7 @@ def place_market_order(symbol, side, quantity, client=None):
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Preview a Binance USDⓈ-M Futures testnet market order.")
     parser.add_argument("symbol")
-    parser.add_argument("side", choices=("BUY", "SELL"))
+    parser.add_argument("side", type=str.upper, choices=("BUY", "SELL"))
     parser.add_argument("quantity")
     parser.add_argument(
         "--submit-testnet",

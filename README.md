@@ -1,6 +1,6 @@
-# Binance Futures testnet CLI
+# FutureForge — Binance Futures testnet CLI
 
-A small command-line example for previewing and placing USDⓈ-M Futures market and limit orders on the Binance Futures **testnet**. The client is hard-wired to testnet; this project does not provide a mainnet trading mode.
+FutureForge is a local learning tool for previewing and placing USDⓈ-M Futures market and limit orders on the Binance Futures **testnet**. The client is hard-wired to testnet; this project does not provide a mainnet trading mode, financial advice, or a real-money trading service.
 
 ## Setup
 
@@ -45,3 +45,9 @@ ruff format --check src tests
 GitHub Actions runs these checks on every push and pull request. The preview tests remove API credentials from their environment and use `python -S`, so they cannot place orders or create a log file.
 
 Only market and limit order entry points are implemented. TWAP, stop-limit, grid, and OCO features from earlier drafts are not included.
+
+## Product scope
+
+This is a local CLI, not a hosted trading SaaS: it has no user accounts, signal service, customer data store, billing or validated paying customers. Keep testnet credentials on your own machine; never put exchange credentials in a public build, web frontend or shared CI runner. Its honest current role is a public developer-education project for Python developers learning exchange API workflows. A one-off workshop could cover safe local setup, order previews, testnet-only submission and failure handling, but validate demand before offering it; there is no subscription or revenue claim today.
+
+`free-for.dev` is not a reason to host this tool or expose API keys. The current preview mode works with Python's standard library, and public-repository CI can run the credential-free tests without exchange secrets.
