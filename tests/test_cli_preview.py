@@ -36,6 +36,8 @@ class PreviewCommandTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("Preview only", result.stdout)
         self.assertIn("LIMIT", result.stdout)
+        self.assertIn("Estimated limit value: 650.00 quote units", result.stdout)
+        self.assertIn("excludes leverage, fees, and execution differences", result.stdout)
 
 
 if __name__ == "__main__":

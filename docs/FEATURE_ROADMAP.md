@@ -4,7 +4,7 @@ Impact and effort are estimates. The actual product is a local, testnet-only ord
 
 | # | Feature | User problem | Alternative gap to validate | Impact | Effort |
 |---:|---|---|---|---|---|
-| 1 | Verbose order preview with normalized parameters | Learners need to understand exactly what the CLI will send | Generic exchange libraries require users to construct payloads | High | Low |
+| 1 | Verbose order preview with normalized parameters and limit-value estimate | Learners need to understand the request and its basic quote-unit size | Generic exchange libraries require users to construct payloads | High | Low |
 | 2 | Symbol filter preflight | Invalid quantity/price steps cause rejected orders | Exchange filters are easy to miss when starting from raw APIs | High | Medium |
 | 3 | Human-readable API error guide | Raw exchange errors are difficult for learners to debug | Large frameworks have broad docs rather than this narrow flow | High | Medium |
 | 4 | Testnet connectivity and clock check | Users cannot tell bad network/key configuration from code errors | Testnet setup and API errors are often mixed together | High | Medium |
@@ -23,3 +23,7 @@ Impact and effort are estimates. The actual product is a local, testnet-only ord
 ## Build rule
 
 Implement only after learner/instructor interviews. Keep all automated checks credential-free. Any exchange submission stays behind explicit `--submit-testnet`; never use mainnet credentials or add a real-money switch. The current safe preview and testnet-only submission already cover the foundational flow.
+
+## Implemented locally
+
+- Feature 1: limit previews show normalized parameters and `quantity × limit price`. The estimate explicitly excludes leverage, fees, and execution differences; market orders do not show a price-based estimate.
