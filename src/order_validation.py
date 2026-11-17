@@ -1,5 +1,5 @@
 import re
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal, InvalidOperation, localcontext
 
 MAX_DECIMAL_TEXT_LENGTH = 64
 
@@ -51,3 +51,11 @@ def build_limit_order(symbol, side, quantity, price):
         "type": "LIMIT",
         "timeInForce": "GTC",
     }
+
+
+def estimate_limit_value(quantity, price):
+    quantity_text = positive_decimal(quantity, "Quantity")
+    price_text = positive_decimal(price, "Price")
+    with localcontext() as context:
+        context.prec = MAX_DECIMAL_TEXT_LENGTH * 2
+        return format(Decimal(quantity_text) * Decimal(price_text), "f")

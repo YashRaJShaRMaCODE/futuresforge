@@ -1,6 +1,6 @@
 import unittest
 
-from src.order_validation import build_limit_order, build_market_order, validate_order
+from src.order_validation import build_limit_order, build_market_order, estimate_limit_value, validate_order
 
 
 class OrderValidationTests(unittest.TestCase):
@@ -54,6 +54,12 @@ class OrderValidationTests(unittest.TestCase):
         for price in ("0", "-1", "NaN"):
             with self.subTest(price=price), self.assertRaises(ValueError):
                 validate_order("BTCUSDT", "SELL", "0.1", price)
+
+    def test_limit_value_preview_preserves_all_validated_decimal_digits(self):
+        self.assertEqual(
+            estimate_limit_value("1.12345678901234567890123456789", "1.12345678901234567890123456789"),
+            "1.2621551567779301945529644873425361987875019051998750190521",
+        )
 
 
 if __name__ == "__main__":

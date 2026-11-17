@@ -26,4 +26,4 @@ Implement only after learner/instructor interviews. Keep all automated checks cr
 
 ## Implemented locally
 
-- Feature 1: limit previews show normalized parameters and `quantity × limit price`. The estimate explicitly excludes leverage, fees, and execution differences; market orders do not show a price-based estimate.
+- Feature 1: limit previews show normalized parameters and exact `quantity × limit price` decimal arithmetic, including inputs beyond Python's default Decimal precision. The estimate explicitly excludes leverage, fees, and execution differences; market orders do not show a price-based estimate.

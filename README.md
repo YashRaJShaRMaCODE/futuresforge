@@ -18,7 +18,7 @@ Add Futures testnet API credentials to `.env` only if you plan to submit orders.
 ## Preview and place testnet orders
 
 Commands preview by default: they validate and print the order without loading credentials, contacting Binance, or creating a log file.
-Limit-order previews also show `quantity × limit price` as an estimated quote-unit value. This omits leverage, fees, and execution differences; market orders have no price-based estimate.
+Limit-order previews also show `quantity × limit price` as an exact decimal estimate for the entered values, without default-context rounding. This omits leverage, fees, and execution differences; market orders have no price-based estimate.
 
 ```powershell
 python src/market_orders.py BTCUSDT BUY 0.01

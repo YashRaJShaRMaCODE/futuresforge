@@ -39,6 +39,16 @@ class PreviewCommandTests(unittest.TestCase):
         self.assertIn("Estimated limit value: 650.00 quote units", result.stdout)
         self.assertIn("excludes leverage, fees, and execution differences", result.stdout)
 
+    def test_limit_preview_does_not_round_validated_high_precision_values(self):
+        precise = "1.12345678901234567890123456789"
+        result = self.run_preview("limit_order.py", "BTCUSDT", "buy", precise, precise)
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn(
+            "Estimated limit value: 1.2621551567779301945529644873425361987875019051998750190521 quote units",
+            result.stdout,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

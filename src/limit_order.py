@@ -1,7 +1,6 @@
 import argparse
-from decimal import Decimal
 
-from order_validation import build_limit_order
+from order_validation import build_limit_order, estimate_limit_value
 
 
 def place_limit_order(symbol, side, quantity, price, client=None):
@@ -29,9 +28,9 @@ def main(argv=None):
         order = build_limit_order(args.symbol, args.side, args.quantity, args.price)
         if not args.submit_testnet:
             print(f"Preview only: {order}. Add --submit-testnet to place it on Binance Futures Testnet.")
-            notional = Decimal(order["quantity"]) * Decimal(order["price"])
+            notional = estimate_limit_value(order["quantity"], order["price"])
             print(
-                f"Estimated limit value: {notional:f} quote units "
+                f"Estimated limit value: {notional} quote units "
                 "(quantity × limit price; excludes leverage, fees, and execution differences)."
             )
             return 0
